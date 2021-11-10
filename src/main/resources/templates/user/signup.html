@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/fragment/header.html :: fragment-header"></div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function isUserIdExist() {
+            var userId = $('#userId').val();
+            $.ajax({
+                url: '/user/idCheck',
+                type: 'get',
+                data: {id: userId},
+                success: function (response) {
+                    console.log(response);
+                    if (response["result"]) {
+                        console.log("사용가능합니다.");
+                    }
+                },
+                error: function () {
+                    alert("에러입니다");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>회원정보</h1>
+<hr>
+<div>
+    <form>
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <p>아이디</p>
+                </td>
+                <td>
+                    <input type="text" id="userId" name="userId" required>
+                    <button type="button" onclick="isUserIdExist()">
+                        중복확인
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>비밀번호</p>
+                </td>
+                <td>
+                    <input type="text" name="password" placeholder="영문, 숫자 조합 8~20자리로 입력해주세요."
+                           required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>비밀번호 확인</p>
+                </td>
+                <td>
+                    <input type="text" placeholder="입력하신 비밀번호를 한 번 더 입력해주세요." required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>이름</p>
+                </td>
+                <td>
+                    <input type="text" name="userName" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>주소</p>
+                </td>
+                <td>
+                    <div>
+                        <form>
+                            <input type="text" name="address" required>
+                            <button type="submit">우편번호 찾기</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>휴대폰번호</p>
+                </td>
+                <td>
+                    <div>
+                        <input type="text" name="phone" required>
+                    </div>
+                </td>
+            
+            <tr>
+                <td>
+                    <p>이메일주소</p>
+                </td>
+                <td>
+                    <div>
+                        <input type="text" name="email" placeholder="자주 사용하시는 이메일 주소를 입력해주세요."
+                               required>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit">회원가입</button>
+    </form>
+</div>
+
+</body>
+</html>
